@@ -71,14 +71,11 @@ let serve = () => {
 
     watch(`js/app.js`, series(validateJS, transpileJSForDev)).on(`change`, reload);
 
-    watch(`css/style.css`)
-        .on(`change`, reload);
+    watch(`css/style.css`).on(`change`, reload);
 
-    watch(`index.html`, validateHTML)
-        .on(`change`, reload);
+    watch(`index.html`, validateHTML).on(`change`, reload);
 
-    watch(`img/**/*`)
-        .on(`change`, reload);
+    watch(`img/**/*`).on(`change`, reload);
 };
 
 exports.validateHTML = validateHTML;
@@ -99,4 +96,3 @@ exports.build = series(
     compressCSS,
     transpileJSForProd,
 );
-
