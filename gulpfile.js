@@ -2,7 +2,7 @@ const { src, dest, series, watch } = require(`gulp`),
 htmlValidator = require(`gulp-html`),
 htmlCompressor = require(`gulp-htmlmin`),
 CSSLinter = require(`gulp-stylelint`),
-cssValidator = require(`gulp-clean-css`),
+cssCompressor = require(`gulp-clean-css`),
 jsLinter = require(`gulp-eslint`),
 babel = require(`gulp-babel`);
 
@@ -27,9 +27,10 @@ let lintCSS = () => {
         }));
 };
 
-let validateCSS = () => {
-    return src(`css/style.css`)
-        .pipe(cssValidator(undefined));
+let compressCSS = () => {
+    return src(`index.html`)
+        .pipe(cssCompressor())
+        .pipe(dest(`prod`));
 };
 
 let lintJS = () => {
@@ -41,6 +42,6 @@ let lintJS = () => {
 exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
 exports.lintCSS = lintCSS;
-exports.validateCSS = validateCSS;
+exports.compressCSS = compressCSS;
 exports.lintJS = lintJS;
 
