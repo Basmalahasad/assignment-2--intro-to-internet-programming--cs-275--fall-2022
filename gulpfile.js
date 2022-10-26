@@ -4,6 +4,7 @@ htmlCompressor = require(`gulp-htmlmin`),
 CSSLinter = require(`gulp-stylelint`),
 cssCompressor = require(`gulp-clean-css`),
 jsLinter = require(`gulp-eslint`),
+jsCompressor = require(`gulp-uglify`),
 babel = require(`gulp-babel`);
 
 let validateHTML = () => {
@@ -38,11 +39,20 @@ let validateJS = () => {
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach(`compact`));
 };
+
 let transpileJSForDev = () => {
     return src(`js/app.js`)
         .pipe(babel())
         .pipe(dest(`.tmp/js`));
 };
+
+let transpileJSForProd = () => {
+    return src(`js/app.js`)
+        .pipe(babel())
+        .pipe(jsCompressor())
+        .pipe(dest(`prod/js`));
+};
+
 
 exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
@@ -50,4 +60,5 @@ exports.lintCSS = lintCSS;
 exports.compressCSS = compressCSS;
 exports.validateJS = validateJS;
 exports.transpileJSForDev = transpileJSForDev;
+exports.transpileJSForProd = transpileJSForProd;
 
