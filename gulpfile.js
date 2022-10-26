@@ -3,7 +3,8 @@ htmlValidator = require(`gulp-html`),
 htmlCompressor = require(`gulp-htmlmin`),
 CSSLinter = require(`gulp-stylelint`),
 cssValidator = require(`gulp-clean-css`),
-jsLinter = require(`gulp-eslint`);
+jsLinter = require(`gulp-eslint`),
+babel = require(`gulp-babel`);
 
 let validateHTML = () => {
     return src(`index.html`)
