@@ -33,7 +33,7 @@ let compressCSS = () => {
         .pipe(dest(`prod`));
 };
 
-let lintJS = () => {
+let validateJS = () => {
     return src(`js/app.js`)
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach(`compact`));
@@ -43,5 +43,5 @@ exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
 exports.lintCSS = lintCSS;
 exports.compressCSS = compressCSS;
-exports.lintJS = lintJS;
+exports.validateJS = validateJS;
 
