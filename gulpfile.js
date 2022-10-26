@@ -9,7 +9,7 @@ babel = require(`gulp-babel`);
 browserSync = require(`browser-sync`),
 reload = browserSync.reload;
 
-let browserChoice = `firefox`;
+let browserChoice = `default`;
 
 let validateHTML = () => {
     return src(`index.html`)
@@ -59,24 +59,22 @@ let transpileJSForProd = () => {
 
 let serve = () => {
     browserSync({
-        notify: true,
         reloadDelay: 50,
         browser: browserChoice,
         server: {
             baseDir: [
                 `.tmp`,
-                `index.html`,
+                `./`,
             ]
         }
     });
 
-    watch(`js/app.js`, series(validateJS, transpileJSForDev))
+    watch(`js/app.js`, series(validateJS, transpileJSForDev)).on(`change`, reload);
+
+    watch(`css/style.css`)
         .on(`change`, reload);
 
-    watch(`css/style`, )
-        .on(`change`, reload);
-
-    watch(`dindex.html`, validateHTML)
+    watch(`index.html`, validateHTML)
         .on(`change`, reload);
 
     watch(`img/**/*`)
