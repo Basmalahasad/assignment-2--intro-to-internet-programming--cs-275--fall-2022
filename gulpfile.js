@@ -38,10 +38,16 @@ let validateJS = () => {
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach(`compact`));
 };
+let transpileJSForDev = () => {
+    return src(`js/app.js`)
+        .pipe(babel())
+        .pipe(dest(`.tmp/js`));
+};
 
 exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
 exports.lintCSS = lintCSS;
 exports.compressCSS = compressCSS;
 exports.validateJS = validateJS;
+exports.transpileJSForDev = transpileJSForDev;
 
